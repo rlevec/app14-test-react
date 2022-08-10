@@ -22,7 +22,11 @@ const Dropdown = (props) => {
         <>
         <div className='dropdown'>
             <p className='dropdown-header header-label'>{label}</p>
-                <btn className='dropdown-btn' onClick={() => setIsActive(!isActive)}>{selectedItem}</btn>
+                <div className='dropdown-btn' onClick={() => setIsActive(!isActive)}>{selectedItem}
+                          <span>
+                            <FontAwesomeIcon icon={faCaretDown}></FontAwesomeIcon>
+                          </span>
+                </div>
                 {console.log(selectedItem)}
                 {isActive && (
                     <div>
