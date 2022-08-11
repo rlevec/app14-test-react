@@ -5,7 +5,7 @@ import FormInput from './FormInput'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const App = () => {
-  const { count, setCount, formValues, setFormValues, handleChange, handleSubmit , loading, setLoading, loadingStep, setLoadingStep, formLoader, setFormLoader, regLoader, setRegLoader, handleEnglish, handleSpanish, english, spanish, setEnglish, setSpanish, sortedInputFields, numberOfSteps} = useContext(AppContext)
+  const { count, setCount, formValues, handleChange, handleSubmit , loading, setLoading, sortedInputFields, numberOfSteps} = useContext(AppContext)
 
   const rightNavContainerRef = useRef(null)
   const leftNavContainerRef = useRef(null)
@@ -21,19 +21,13 @@ const App = () => {
     }, 3000)
     return () => clearTimeout(timeOut)
   }, [])
+ 
+
 
   useEffect(() => {
-    setLoadingStep(true)
-    let timeOut = setTimeout(() => {
-      setLoadingStep(false)
-    }, 1000)
-    return () => clearTimeout(timeOut)
-  }, [count])
-
-
-     useEffect(() => {
     const containerHeight = rightNavContainerRef.current.getBoundingClientRect().height;
-    leftNavContainerRef.current.style.height = `${containerHeight}vh`
+    leftNavContainerRef.current.style.height = `${containerHeight}px`
+    console.log(leftNavContainerRef.current.style.height)
   }, [])
 
 
@@ -53,65 +47,60 @@ const App = () => {
         </div>
       </div>
       <div className='right-side-nav' ref={rightNavContainerRef}>
-
         <div className='app'>
-         
-            <div className='progressBar-container'>
+         <div className='progressBar-container'>
               <ProgressBar completed={count} maxCompleted={numberOfSteps} labelClassName="labelBar"/>
-
-
                </div>
-            <form className='col-15 form' onSubmit={handleSubmit}>
-               {
-          sortedInputFields
-            .filter(input => input.step === count)
-            .map((inputField, index) => {
-              const {code, name, fieldType, dataType, order, defaultValue, required, step, valueList, validators} = inputField
-              return (
-                <>
-                  <FormInput
-                    key={index}
-                    name={code}
-                    label={name}
-                    fieldType={fieldType}
-                    dataType={dataType}
-                    order={order}
-                    defaultValue={defaultValue}
-                    required={required}
-                    step={step}
-                    valueList={valueList}
-                    validators={validators}
-                    formValues={formValues.code}
-                    handleChange={handleChange}
-                  />
-                </>
-              )
-            })
-        }
-
-             </form>
+               <form className='col-15 form' onSubmit={handleSubmit}>
+                {
+                sortedInputFields
+                  .filter(input => input.step === count)
+                  .map((inputField, index) => {
+                    const {code, name, fieldType, dataType, order, defaultValue, required, step, valueList, validators} = inputField
+                    return (
+                      <>
+                        <FormInput
+                          key={index}
+                          name={code}
+                          label={name}
+                          fieldType={fieldType}
+                          dataType={dataType}
+                          order={order}
+                          defaultValue={defaultValue}
+                          required={required}
+                          step={step}
+                          valueList={valueList}
+                          validators={validators}
+                          formValues={formValues.code}
+                          handleChange={handleChange}
+                        />
+                      </>
+                    )
+                  })
+             }
+            </form>
             {
-        count > 1 && (
-          <button
-            className='btn btn-dark btn-prev' 
-            type='button'
-            onClick={() => setCount(count - 1)}
-          >
-            Back
-          </button>
-        )
-      }
-      {
-          count < numberOfSteps && (
-            <button
-              className='btn btn-light btn-next' 
-              type='button'
-              onClick={() => setCount(count + 1)}
-            >
-              Next
-            </button>
-          )
-      }
+            count > 1 && (
+              <button
+                className='btn btn-dark btn-prev' 
+                type='button'
+                onClick={() => setCount(count - 1)}
+              >
+                Back
+              </button>
+            )
+           }
+           {
+            count < numberOfSteps && (
+              <button
+                className='btn btn-light btn-next' 
+                type='button'
+                onClick={() => setCount(count + 1)}
+              >
+                Next
+              </button>
+            )
+            }
         </div>
       </div> 
       </>)}

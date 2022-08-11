@@ -44,6 +44,22 @@ const FormInput = (props) => {
           />
         </>
         )
+
+    case 'date': 
+        return (
+        <>
+          <label className='form-label'>{label}</label>
+          <input 
+              placeholder={defaultValue}
+              type={dataType}
+              className='form-control'
+              name={name}
+              onChange={handleChange} 
+              value={formValues}
+          />
+        </>
+        )
+        
     case 'dropdown':
       return (
         <Dropdown placeholder={defaultValue}

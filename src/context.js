@@ -36,15 +36,6 @@ const AppProvider = ({children}) => {
     })
   }
 
-  {/* const handleChange1 = (e) => {
-    const {name, value} = e.target
-    setSelectedItem({
-      ...selectedItem,
-      [name]: value
-    })
-  } */}
-
-
 
    const handleEnglish = () => {
     setEnglish(true)

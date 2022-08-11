@@ -374,6 +374,35 @@ button {
   margin-bottom: -10px !important;
 }
 
+.form-label-dropdown {
+    color: #002D62 !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 100;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.dropdown-select {
+  width: 250px;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 8px 16px !important;
+  border: 2px solid #002D62 !important;
+  border-radius: 5px;
+  color: #002D62 !important;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+
+.dropdown-container {
+  text-align: center;
+  width: 200px;
+  border-radius: 5px;
+  border: 2px solid #002D62 !important;
+  color: #002D62 !important;
+}
+
 .header-label {
   font-weight: 200;
   font-size: 17px;
