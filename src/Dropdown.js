@@ -4,9 +4,17 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
 const Dropdown = (props) => {
-  const {placeholder, dataType, fieldType, name, handleChange, formValues, valueList, order, label} = props
+  const {placeholder, dataType, fieldType, name, handleChange, setFormValues, formValues, valueList, order, label} = props
   const {selectedItem, setSelectedItem, isActive, setIsActive} = useContext(AppContext)
 
+
+  const handleChange1 = (e) => {
+    const {name, selectedItem} = e.target
+    setFormValues({
+      ...formValues,
+      [name]: selectedItem
+    })
+  }
 
 
  let options=[]
@@ -16,20 +24,7 @@ const Dropdown = (props) => {
 
   console.log(options[0])
 
-  ///const [selectedOption, setSelectedOption] = useState();
-  return (
-    <>
-      <h4>{label}</h4>
-      <select
-        value={formValues}
-        onChange={handleChange}>
-        {options.map((option, index) => (
-          <option key={index}>{option}</option>
-        ))}
-      </select>
-      <div></div>
-      </>
-  );
+  const [selectedOption, setSelectedOption] = useState();
 
   {/*}
   const [selectedOption, setSelectedOption] = useState();
@@ -43,7 +38,6 @@ const Dropdown = (props) => {
       </select>
   );
         */}
-{/*
   return (
         <>
         <div className='dropdown'>
@@ -55,28 +49,24 @@ const Dropdown = (props) => {
                 </div>
                 {console.log(selectedItem)}
                 {isActive && (
-                    <select>
-                    {
-                        options.map((option, index) => {
-                            return (
-                                <select 
-                                    key={index} 
-                                    onClick={() => {
-                                    setSelectedItem(option)
-                                    setIsActive(false)
-                                    }
-                                    }
-                                >
-                                    {option}
-                                </select>
-                                )
-                        })
-                    }
-                    </select>
+                          <select
+        name={name}
+        value={formValues}
+        onChange={handleChange}>
+        {options.map((option, index) => (
+          <option key={index} 
+          onClick={() => 
+            {setSelectedItem(option)  
+              setIsActive(false)
+            }
+           }>{option}
+           </option>
+        ))}
+      </select>
                 )}
         </div>
     </>
-                ) */}
+                ) 
 }
 
 export default Dropdown
