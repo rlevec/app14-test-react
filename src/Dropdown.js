@@ -14,10 +14,36 @@ const Dropdown = (props) => {
     options.push(item.name)
   }) 
 
-  console.log(options)
+  console.log(options[0])
 
+  ///const [selectedOption, setSelectedOption] = useState();
+  return (
+    <>
+      <h4>{label}</h4>
+      <select
+        value={formValues}
+        onChange={handleChange}>
+        {options.map((option, index) => (
+          <option key={index}>{option}</option>
+        ))}
+      </select>
+      <div></div>
+      </>
+  );
 
-  
+  {/*}
+  const [selectedOption, setSelectedOption] = useState();
+  return (
+      <select
+        value={selectedOption}
+        onChange={e => setSelectedOption(e.target.value)}>
+        {options.map((option, index) => (
+          <option key={index}>{option}</option>
+        ))}
+      </select>
+  );
+        */}
+{/*
   return (
         <>
         <div className='dropdown'>
@@ -29,11 +55,11 @@ const Dropdown = (props) => {
                 </div>
                 {console.log(selectedItem)}
                 {isActive && (
-                    <div>
+                    <select>
                     {
                         options.map((option, index) => {
                             return (
-                                <div 
+                                <select 
                                     key={index} 
                                     onClick={() => {
                                     setSelectedItem(option)
@@ -42,15 +68,15 @@ const Dropdown = (props) => {
                                     }
                                 >
                                     {option}
-                                </div>
+                                </select>
                                 )
                         })
                     }
-                    </div>
+                    </select>
                 )}
         </div>
     </>
-  )
+                ) */}
 }
 
 export default Dropdown
