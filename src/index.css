@@ -30,7 +30,6 @@ button {
 .terms-body {
   height: 545px;
   align-items: center;
-  margin-left: -60px;
   padding: 0;
   background: #5F9EA0;
   display: flex;
@@ -427,7 +426,7 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: -30px;
+  margin-bottom: 30px;
 }
 
 
@@ -497,6 +496,14 @@ input {
   margin-left: 60px;
   padding-top: 20px;
 }
+.registration-complete-step {
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: #002D62;
+    margin-left: 110px;
+    padding-top: 20px;
+}
 
 
 .loader {
@@ -543,4 +550,8 @@ input {
 
 .barProgress {
   background-color: #d13639;
+}
+
+.progressBar-container-step4 {
+  margin-bottom: 30px;
 }

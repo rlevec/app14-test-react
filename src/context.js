@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { inputFields } from './data'
 
 
@@ -9,15 +9,17 @@ const AppProvider = ({children}) => {
   const [loading, setLoading] = useState(false)
   const [loadingStep, setLoadingStep] = useState(false)
   const [formLoader, setFormLoader] = useState(false)
-
-
+  const rightNavContainerRef = useRef(null)
+  const leftNavContainerRef = useRef(null)
   const [selectedItem, setSelectedItem] = useState('')  
   const [isActive, setIsActive] = useState(false)
-  const [english, setEnglish] = useState(true)
-  const [spanish, setSpanish] = useState(false)
   const [count, setCount] = useState(1)
+  const [data, setData] = useState([])
+  const [showTerms, setShowTerms] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(false)
+  const [lastStep, setLastStep] = useState(false)
 
-    let initialValues = {};
+  let initialValues = {};
     inputFields.forEach(item => {
       initialValues[item.code] = ''
   })
@@ -36,21 +38,36 @@ const AppProvider = ({children}) => {
     })
   }
 
-
-   const handleEnglish = () => {
-    setEnglish(true)
-    setSpanish(false)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setIsSubmit(true)
+    setData(formValues.forEach((item) => item.name))
   }
 
-  const handleSpanish = () => {
-    setSpanish(true)
-    setEnglish(false)
+
+  
+  const [language, setLanguage] = useState('en')
+
+  const currentLanguage = language
+
+  const multiLanguage = {
+    en: {
+      'prevButton': 'Back',
+      'nextButton': 'Next'
+    },
+    esp: {
+      'prevButton': 'Espalda',
+      'nextButton': 'Siguente'
+    }
   }
+
+
+
 
 
      return (
         <AppContext.Provider value={
-            {count, setCount, formValues, setFormValues, handleChange, loading, setLoading, loadingStep, setLoadingStep, formLoader, setFormLoader, regLoader, setRegLoader, handleEnglish, handleSpanish, english, spanish, setEnglish, setSpanish, sortedInputFields, numberOfSteps, selectedItem, setSelectedItem, isActive, setIsActive}
+            {count, setCount, formValues, setFormValues, handleChange, loading, setLoading, loadingStep, setLoadingStep, formLoader, setFormLoader, regLoader, setRegLoader, sortedInputFields, numberOfSteps, selectedItem, setSelectedItem, isActive, setIsActive, language, setLanguage, currentLanguage, multiLanguage, rightNavContainerRef, leftNavContainerRef, handleSubmit, showTerms, setShowTerms, isSubmit, setIsSubmit, lastStep, setLastStep}
         }>{children}</AppContext.Provider>
     )
 }

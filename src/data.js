@@ -7,7 +7,7 @@ export const inputFields = [
     "order": 11,
     "defaultValue": "",
     "required": true,
-    "step": 2,
+    "step": 3,
     "valueList": [],
     "validators": [
       {
@@ -36,7 +36,7 @@ export const inputFields = [
     "order": 8,
     "defaultValue": "",
     "required": true,
-    "step": 2,
+    "step": 3,
     "valueList": [],
     "validators": [
       {
@@ -65,7 +65,7 @@ export const inputFields = [
     "order": 0,
     "defaultValue": "",
     "required": true,
-    "step": 1,
+    "step": 2,
     "valueList": [],
     "validators": [
       {
@@ -227,7 +227,7 @@ export const inputFields = [
     "order": 6,
     "defaultValue": "",
     "required": true,
-    "step": 1,
+    "step": 2,
     "valueList": [],
     "validators": [
       {
@@ -258,7 +258,7 @@ export const inputFields = [
     "order": 7,
     "defaultValue": "",
     "required": true,
-    "step": 1,
+    "step": 2,
     "valueList": [],
     "validators": [
       {
@@ -281,7 +281,7 @@ export const inputFields = [
     "order": 9,
     "defaultValue": "",
     "required": true,
-    "step": 2,
+    "step": 3,
     "valueList": [],
     "validators": [
       {
@@ -310,7 +310,7 @@ export const inputFields = [
     "order": 10,
     "defaultValue": "hr",
     "required": true,
-    "step": 2,
+    "step": 3,
     "valueList": [
       { "order": 1, "value": "me", "name": "Montenegro" },
       { "order": 1, "value": "hr", "name": "Croatia" },
@@ -334,5 +334,8 @@ export const inputFields = [
         "parameters": { "regex": "^[a-z]{2}$" }
       }
     ]
+  },
+  {
+    "step": 4,
   }
 ]

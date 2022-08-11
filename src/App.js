@@ -1,14 +1,38 @@
-import React, { useEffect, useRef, useContext, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { AppContext  } from './context'
 import PropagateLoader from "react-spinners/PropagateLoader";
 import FormInput from './FormInput'
 import ProgressBar from "@ramonak/react-progress-bar";
+import TermsOfServiceComponent from './TermsOfServiceComponent';
 
 const App = () => {
-  const { count, setCount, formValues, handleChange, handleSubmit , loading, setLoading, sortedInputFields, numberOfSteps} = useContext(AppContext)
+  const { count, setCount, formValues, handleChange, handleSubmit , loading, setLoading, sortedInputFields, numberOfSteps, language, setLanguage, currentLanguage, multiLanguage, rightNavContainerRef, leftNavContainerRef, isSubmit, setRegLoader, setIsSubmit, lastStep, setLastStep} = useContext(AppContext)
 
-  const rightNavContainerRef = useRef(null)
-  const leftNavContainerRef = useRef(null)
+
+
+
+  let labelValues = [];
+   sortedInputFields.forEach((item) => {
+    labelValues.push(item.name)
+  })
+
+  let labelObjects = {... labelValues}
+  console.log(labelObjects[0])
+
+
+
+
+
+  {
+   //label mutliLanguage 
+   /*const labelLanguage = (language, labels) => {
+   if(language === 'esp') {
+    labels[0]: 'nombre de usuario'
+    
+   }
+  }
+  */}
+ 
 
 
 
@@ -21,14 +45,33 @@ const App = () => {
     }, 3000)
     return () => clearTimeout(timeOut)
   }, [])
+
+  useEffect(() => {
+    setRegLoader(true)
+    let timeOut = setTimeout(() => {
+      setRegLoader(false)
+      setIsSubmit(false)
+    }, 7000)
+    return () => clearTimeout(timeOut)
+  }, [isSubmit])
+
  
 
 
   useEffect(() => {
     const containerHeight = rightNavContainerRef.current.getBoundingClientRect().height;
     leftNavContainerRef.current.style.height = `${containerHeight}px`
-    console.log(leftNavContainerRef.current.style.height)
   }, [])
+
+  useEffect(() => {
+    leftNavContainerRef.current.style.height = `120vh`
+  }, [isSubmit])
+
+  useEffect(() => {
+    leftNavContainerRef.current.style.height = `120vh`
+  }, [lastStep])
+
+
 
 
 
@@ -47,8 +90,15 @@ const App = () => {
         </div>
       </div>
       <div className='right-side-nav' ref={rightNavContainerRef}>
+        {isSubmit && (
+          <div className='registration-complete'>Registration Complete</div>
+        )}    
         <div className='app'>
-         <div className='progressBar-container'>
+          <div className='language-container'>
+            <button onClick={() => setLanguage('en')} className='eng-btn'></button>
+            <button onClick={() => setLanguage('esp')} className='spa-btn'></button>
+          </div>
+         <div className='progressBar-container progressBar-container-step4'>
               <ProgressBar completed={count} maxCompleted={numberOfSteps} labelClassName="labelBar"/>
                </div>
                <form className='col-15 form' onSubmit={handleSubmit}>
@@ -78,26 +128,36 @@ const App = () => {
                     )
                   })
              }
+            {
+              count === numberOfSteps && (
+                <TermsOfServiceComponent />
+              )
+            }
+            {
+              count === numberOfSteps && setLastStep(true)
+            }
             </form>
             {
             count > 1 && (
               <button
+                name='prevBtn'
                 className='btn btn-dark btn-prev' 
                 type='button'
                 onClick={() => setCount(count - 1)}
               >
-                Back
+                {multiLanguage[currentLanguage]['prevButton']}
               </button>
             )
            }
            {
             count < numberOfSteps && (
               <button
+                name='nextBtn'
                 className='btn btn-light btn-next' 
                 type='button'
                 onClick={() => setCount(count + 1)}
               >
-                Next
+                {multiLanguage[currentLanguage]['nextButton']}
               </button>
             )
             }
